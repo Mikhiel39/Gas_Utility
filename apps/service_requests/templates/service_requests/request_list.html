@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Your Service Requests</h1>
+<ul>
+    {% for request in requests %}
+    <li>
+       <a href="{% url 'service_requests:request_detail' pk=request.pk %}">
+            Request {{ request.id }}: {{ request.request_type }} ({{ request.status }})
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'service_requests:request_create' %}">Create a New Request</a>
+{% endblock %}

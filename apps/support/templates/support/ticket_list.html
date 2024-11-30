@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Support Tickets</h1>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>User</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Submitted At</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for ticket in tickets %}
+        <tr>
+            <td>{{ ticket.id }}</td>
+            <td>{{ ticket.user.username }}</td>
+            <td>{{ ticket.get_request_type_display }}</td>
+            <td>{{ ticket.get_status_display }}</td>
+            <td>{{ ticket.created_at }}</td>
+            <td>
+                <a href="{% url 'ticket_detail' ticket.id %}">View</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div>
+    <span class="pagination">
+        {% if tickets.has_previous %}
+            <a href="?page={{ tickets.previous_page_number }}">Previous</a>
+        {% endif %}
+        Page {{ tickets.number }} of {{ tickets.paginator.num_pages }}
+        {% if tickets.has_next %}
+            <a href="?page={{ tickets.next_page_number }}">Next</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock %}

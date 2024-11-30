@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Request Details</h1>
+<p><strong>Type:</strong> {{ object.request_type }}</p>
+<p><strong>Details:</strong> {{ object.details }}</p>
+<p><strong>Status:</strong> {{ object.status }}</p>
+<p><strong>Created At:</strong> {{ object.created_at }}</p>
+<p><strong>Last Updated:</strong> {{ object.updated_at }}</p>
+{% if object.attachment %}
+<p><strong>Attachment:</strong> <a href="{{ object.attachment.url }}">Download</a></p>
+{% endif %}
+<a href="{% url 'service_requests:request_detail' pk=requests.pk %}">View Details</a>
+{% endblock %}

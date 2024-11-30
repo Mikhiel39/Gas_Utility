@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Support Ticket #{{ ticket.id }}</h1>
+
+<p><strong>User:</strong> {{ ticket.user.username }}</p>
+<p><strong>Type:</strong> {{ ticket.get_request_type_display }}</p>
+<p><strong>Status:</strong> {{ ticket.get_status_display }}</p>
+<p><strong>Details:</strong> {{ ticket.details }}</p>
+<p><strong>Attachment:</strong>
+    {% if ticket.attachment %}
+        <a href="{{ ticket.attachment.url }}" target="_blank">Download</a>
+    {% else %}
+        None
+    {% endif %}
+</p>
+<p><strong>Submitted At:</strong> {{ ticket.created_at }}</p>
+<p><strong>Last Updated:</strong> {{ ticket.updated_at }}</p>
+
+<a href="{% url 'ticket_list' %}">Back to Tickets</a>
+{% endblock %}
